@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/naslov"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:singleLine="false"
+            android:text="Igre sa karticama"
+            android:textAlignment="center"
+            android:textColor="#3B7EFF"
+            android:layout_marginTop="24dp"
+            android:textAllCaps="true"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="4dp" />
+
+        <android.widget.Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Domaće životinje"
+            android:background="@drawable/background_blue"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="14dp"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:id="@+id/domace_zivotinje"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/naslov"
+            tools:layout_editor_absoluteX="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
