@@ -3,35 +3,56 @@ package com.lazrdev.cardgame
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class Dog : AppCompatActivity() {
-    private val player: MediaPlayer = MediaPlayer();
+    private var player: MediaPlayer? = MediaPlayer();
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dog)
-        var player: MediaPlayer? = null
 
+        var player: MediaPlayer? = null
         player = MediaPlayer.create(this, R.raw.dog)
         player?.isLooping = true // Set looping
         player?.setVolume(100f, 100f)
-
         //player.release();
         player?.start()
+
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
-            player.release();
-            super.onBackPressed();
-
+//            player.stop()
+//            player.release()
+//            this.onBackPressed()
+            this.stopPlayer()
         }
-
     }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBackPressed() {
-        player.release();
-        super.onBackPressed();
+//        player.pause()
+//        player.stop();
+//        player!!.release();
+//        super.onBackPressed();
+        super.onBackPressed()
+
+        this.stopPlayer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        this.stopPlayer();
+    }
+    private fun stopPlayer() {
+        if (player != null) {
+            player!!.release()
+            player = null
+            Toast.makeText(this, "MediaPlayer released", Toast.LENGTH_SHORT).show()
+        }
     }
 
     //nista od ovoga ne zaustavlja zvuk na sistemsko back dugme
@@ -58,11 +79,13 @@ class Dog : AppCompatActivity() {
 //    }
 
 //    override fun onPause() {
+//       player.stop()
 //        player.release();
 //        super.onPause()
 //    }
 
 //    override fun onDestroy() {
+//        player.stop()
 //        player.release();
 //        super.onDestroy()
 //    }
