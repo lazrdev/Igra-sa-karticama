@@ -1,3 +1,5 @@
 package com.lazrdev.cardgame
 
-data class Item(val slika: String, val title: String, val category: String)
+import android.graphics.drawable.Drawable
+
+data class Item(val slika: Drawable?, val title: String?, val category: String?)

@@ -1,15 +1,16 @@
 package com.lazrdev.cardgame
 
+import android.R.attr.data
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.media.MediaPlayer
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,34 +21,49 @@ import org.json.JSONObject
 import java.io.IOException
 import java.nio.charset.Charset
 
+
 class DomaceZivotinje : AppCompatActivity() {
     private var player: MediaPlayer? = MediaPlayer();
-    private var items: MutableList<Item> = MutableList()
-    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
+    private var items: MutableList<Item> =  mutableListOf(Item(null, null , null))
+    @SuppressLint("MissingInflatedId", "SuspiciousIndentation", "UseCompatLoadingForDrawables")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_domace_zivotinje)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val linearLayoutManager = LinearLayoutManager(applicationContext)
         val gridLayoutManager =
             GridLayoutManager(applicationContext, 3, RecyclerView.VERTICAL, false)
-        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = gridLayoutManager
         try {
             val obj = JSONObject(loadJSONFromAsset())
-            val itemArray = obj.getJSONArray("users")
-            for (i in 0 until userArray.length()) {
+            val itemArray = obj.getJSONArray("items")
+            for (i in 0 until itemArray.length()) {
                 val itemDetail = itemArray.getJSONObject(i)
+                val imageName: String = itemDetail.getString("src")
+
+                // get resource id by image name
+
+                // get resource id by image name
+                val resourceId =
+                    resources.getIdentifier(imageName, "drawable", this.packageName)
+
+                // get drawable by resource id
+
+                // get drawable by resource id
+                val drawable = this.resources.getDrawable(resourceId)
                 items.add(Item(
+                    drawable,
                     itemDetail.getString("title"),
-                    itemDetail.getString("src"),
                     itemDetail.getString("category")
                 ))
+//                items.add(Item(
+//                    itemDetail.getString("title"),
+////                    itemDetail.getString("src"),
+//                    itemDetail.getString("category")
+//                ))
 //                emailId.add(userDetail.getString("email"))
 //                val contact = userDetail.getJSONObject("contact")
 //                mobileNumbers.add(contact.getString("mobile"))
